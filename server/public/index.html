@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>To Do</title>
+    <link rel="stylesheet" href="/css/master.css">
+    <script src="/vendors/jquery.js" charset="utf-8"></script>
+    <script src="/scripts/client.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <h1>To Do</h1>
+    <div id="createTaskDiv">
+      <h4>Add shit or edit it</h4>
+    <form id="createTask">
+      <input type="text" placeholder="task" size="50" id="task">
+      <select name="priority" id="priority">
+        <option disabled selected value> --select priority level-- </option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+      <button type="submit" id="addTask">Add Task</button>
+    </form>
+    </div>
+    <div id="appendTasksDiv">
+      <table>
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Priority</th>
+            <th>Delete</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+        <tbody id="appendTasks">
+
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

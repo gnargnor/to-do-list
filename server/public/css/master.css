@@ -1,0 +1,19 @@
+html body {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+h1 {
+  margin: auto;
+  font-family: sans-serif;
+
+}
+
+#appendTasksDiv {
+  text-align: center;
+}
+
+table {
+  margin: auto;
+}
