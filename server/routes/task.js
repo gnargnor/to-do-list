@@ -37,24 +37,22 @@ router.get('/', function(req, res){
 });
 
 router.put('/edit', function(req, res){
-  var id = req.params.id;
-  var task = req.params.task;
-  var priority = req.params.priority;
+  var id = Number(req.body.id);
+  var task = req.body.task;
+  var priority = req.body.priority;
   pool.connect(function(errorConnectingToDatabase, db, done){
     if(errorConnectingToDatabase) {
       console.log('Error connecting to the database.');
       res.send(500);
     } else {
-      // We connected!!!!
       db.query('UPDATE weekend3_tasks ' +
-                'SET task=$1, priority=$2, WHERE id=$3;',
+                'SET task=$1, priority=$2 WHERE id=$3;',
                 [task, priority, id], function(queryError, result){
                 done();
         if(queryError) {
           console.log('Error making query.');
-          res.send(500);
+          res.sendStatus(500);
         } else {
-          // console.log(result); // Good for debugging
           res.send(result.rows);
         }
       });

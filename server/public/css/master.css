@@ -2,6 +2,8 @@ html body {
   margin: 0;
   padding: 0;
   text-align: center;
+  background-color: #88B9BF;
+  color: #2D3E40;
 }
 
 h1 {
@@ -10,10 +12,39 @@ h1 {
 
 }
 
+h4 {
+  font-family: sans-serif;
+}
+
 #appendTasksDiv {
   text-align: center;
 }
 
 table {
   margin: auto;
+  background-color: #A3DEE5;
+  border-collapse: collapse;
+  font-family: sans-serif;
+  max-width: 500px;
+  color: #2D3E40;
+}
+
+table, th, td {
+  border: 1px solid black;
+  padding:4px;
+
+
+}
+
+th {
+  background-color: #5B7B7F;
+  color: #ececec;
+}
+
+button {
+  background-color: #ececec;
+  font-family: sans-serif;
+  border: 0px;
+  border-radius: 5px;
+  margin:0px 5px;
 }

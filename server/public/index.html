@@ -4,15 +4,16 @@
     <meta charset="utf-8">
     <title>To Do</title>
     <link rel="stylesheet" href="/css/master.css">
+    <!-- <script src="/vendors/bootstrap.min.js" charset="utf-8"></script> -->
     <script src="/vendors/jquery.js" charset="utf-8"></script>
     <script src="/scripts/client.js" charset="utf-8"></script>
   </head>
   <body>
     <h1>To Do</h1>
     <div id="createTaskDiv">
-      <h4>Add shit or edit it</h4>
+      <h4>add tasks, delete, or edit</h4>
     <form id="createTask">
-      <input type="text" placeholder="task" size="50" id="task">
+      <input type="text" placeholder="task" size="50" id="task"><br>
       <select name="priority" id="priority">
         <option disabled selected value> --select priority level-- </option>
         <option value="high">High</option>
@@ -22,14 +23,14 @@
       <button type="submit" id="addTask">Add Task</button>
     </form>
     </div>
+    <br> <br> <br>
     <div id="appendTasksDiv">
-      <table>
+      <table class="table">
         <thead>
           <tr>
             <th>Task</th>
             <th>Priority</th>
-            <th>Delete</th>
-            <th>Edit</th>
+            <th></th>
           </tr>
         </thead>
         <tbody id="appendTasks">

@@ -19,7 +19,6 @@ function addEventListeners(){
   $('#addTask').on('click', function(){
     console.log('tons of butt');
     if (editing) {
-      console.log(editID);
       $.ajax({
         type: 'PUT',
         url: 'task/edit',
@@ -29,7 +28,7 @@ function addEventListeners(){
           priority: $('#priority').val()
         },
         success: function(response){
-          console.log(response);
+          console.log(typeOf(response.editID));
           getTasks();
         }
     });
@@ -90,8 +89,9 @@ function getTasks(){
         var $el = $('#appendTasks').children().last();
         $el.append('<td>' + curTask.task + '</td>');
         $el.append('<td>' + curTask.priority + '</td>');
-        $el.append('<td><button id="delete" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '">del</button></td>');
-        $el.append('<td><button id="edit" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '">edit</button></td>');
+        $el.append('<td><button id="delete" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '">del</button>' +
+                   '<button id="edit" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '">edit</button>' +
+                   '<button id="complete" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '">complete</button></td>');
       }
     }
   });
