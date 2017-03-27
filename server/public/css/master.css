@@ -14,11 +14,13 @@ html body {
   width: 200px;
   height: 75px;
   line-height: 75px;
+  box-shadow: -4px 6px 6px #888888;
 }
 h1 {
   margin: auto;
   font-family: sans-serif;
-  color: #000d61
+  color: #000d61;
+
 }
 
 h4 {
@@ -30,13 +32,15 @@ h4 {
 }
 
 table {
-  margin:  0 auto 10px;
+  margin:  0 auto 25px;
   background-color: #A3DEE5;
   border-collapse: collapse;
   font-family: sans-serif;
   max-width: 500px;
   color: #2D3E40;
   border-radius: 10px;
+  box-shadow: -4px 6px 6px #888888;
+
 }
 
 table, th, td {
