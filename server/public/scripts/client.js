@@ -57,37 +57,42 @@ function addEventListeners(){
   });
 
   $('#appendTasks').on('click', '#delete', function(){
-    console.log('Delete task: ' + $(this).data('task'));
-    var delID = ($(this).data('cid').toString());
-    console.log(delID);
-    $.ajax({
-      type: 'DELETE',
-      url: '/task/delete/' + delID,
-      success: function(response){
-        getTasks();
-      }
-    });
+    if (editing){
+      alert('Currently editing. Commit edit and retry.');
+    } else {
+      var delID = ($(this).data('cid').toString());
+      $.ajax({
+        type: 'DELETE',
+        url: '/task/delete/' + delID,
+        success: function(response){
+          getTasks();
+        }
+      });
+    }
   });
 
   $('#appendTasks').on('click', '#completed', function(){
     // console.log('completed targeted');
-    var comID = $(this).data('cid').toString();
-    console.log(comID);
-    $.ajax({
-      type: 'PUT',
-      url: '/task/completed',
-      data: {
-              id: comID,
-              task: $(this).data('task'),
-              priority: $(this).data('priority'),
-              completed: $(this).data('completed')
-            },
-      success: function(response){
-        console.log('success :', response);
-        // $('.success').append('<p class="proud">Proud of U</p>').fadeOut(3000);
-        getTasks();
-      }
-    });
+    if (editing){
+      alert('Currently editing. Commit edit and retry.');
+    } else {
+      var comID = $(this).data('cid').toString();
+      $.ajax({
+        type: 'PUT',
+        url: '/task/completed',
+        data: {
+                id: comID,
+                task: $(this).data('task'),
+                priority: $(this).data('priority'),
+                completed: $(this).data('completed')
+              },
+        success: function(response){
+          console.log('success :', response);
+          // $('.success').append('<p class="proud">Proud of U</p>').fadeOut(3000);
+          getTasks();
+        }
+      });
+    }
   });
 
 
