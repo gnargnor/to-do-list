@@ -49,7 +49,7 @@ function addEventListeners(){
           completed: 'false'
         },
       success: function(response){
-        console.log(response);
+        // console.log(response);
         getTasks();
       },
     });
@@ -70,7 +70,7 @@ function addEventListeners(){
   });
 
   $('#appendTasks').on('click', '#completed', function(){
-    console.log('completed targeted');
+    // console.log('completed targeted');
     var comID = $(this).data('cid').toString();
     console.log(comID);
     $.ajax({
@@ -83,8 +83,8 @@ function addEventListeners(){
               completed: $(this).data('completed')
             },
       success: function(response){
-        console.log(response);
-        // $('.success').text('Proud of U').fadeOut(3000);
+        console.log('success :', response);
+        // $('.success').append('<p class="proud">Proud of U</p>').fadeOut(3000);
         getTasks();
       }
     });
@@ -111,28 +111,64 @@ function getTasks(){
     type: 'GET',
     url: '/task',
     success: function(response){
-      console.log(response);
-      //cycles through
-      for (var i = 0; i < response.length; i++){
-        console.log('editing: ', editing);
-        var curTask = response[i];
-        var $el = $('#appendTasks').children().last();
-        if (curTask.completed === 'false'){
-          $('#appendTasks').append('<tr class="incomplete">');
-          $el.append('<td>' + curTask.task + '</td>');
-          $el.append('<td>' + curTask.priority + '</td>');
-          $el.append('<td><button id="delete" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '" data-completed="' + curTask.completed + '">del</button>' +
-                     '<button id="edit" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '" data-completed="' + curTask.completed + '">edit</button>' +
-                     '<button id="completed" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '" data-completed="' + curTask.completed + '">completed</button></td></tr>');
-        } else {
-          $('#appendTasks').append('<tr class="completed">');
-          $el.append('<td>' + curTask.task + '</td>');
-          $el.append('<td>' + curTask.priority + '</td>');
-          $el.append('<td><button id="delete" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '" data-completed="' + curTask.completed + '">del</button>' +
-                     '<button id="edit" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '" data-completed="' + curTask.completed + '">edit</button>' +
-                     '<button id="completed" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '" data-completed="' + curTask.completed + '">completed</button></td></tr>');
-        }
-      }
+//       console.log(response);
+//       //cycles through
+//       for (var i = 0; i < response.length; i++){
+//         console.log('editing: ', editing);
+//         var curTask = response[i];
+//         var $el = $('#appendTasks').children().last();
+//         if (curTask.completed === 'false'){
+//           $('#appendTasks').append('<tr class="incomplete">');
+//           $el.append('<td>' + curTask.task + '</td>');
+//           $el.append('<td>' + curTask.priority + '</td>');
+//           $el.append('<td><button id="delete" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '" data-completed="' + curTask.completed + '">del</button>' +
+//                      '<button id="edit" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '" data-completed="' + curTask.completed + '">edit</button>' +
+//                      '<button id="completed" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '" data-completed="' + curTask.completed + '">completed</button></td></tr>');
+//         } else {
+//           $('#appendTasks').append('<tr class="completed">');
+//           $el.append('<td>' + curTask.task + '</td>');
+//           $el.append('<td>' + curTask.priority + '</td>');
+//           $el.append('<td><button id="delete" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '" data-completed="' + curTask.completed + '">del</button>' +
+//                      '<button id="edit" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '" data-completed="' + curTask.completed + '">edit</button>' +
+//                      '<button id="completed" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '" data-completed="' + curTask.completed + '">completed</button></td></tr>');
+//         }
+//       }
+
+
+
+
+
+console.log(response);
+//cycles through
+for (var i = 0; i < response.length; i++){
+  console.log('editing: ', editing);
+  var curTask = response[i];
+  console.log(curTask);
+  $('#appendTasks').append('<tr></tr>');
+  var $el = $('#appendTasks').children().last();
+  if (curTask.completed === 'false'){
+    if(curTask.pid === 1){
+      $el.addClass('high');
+    } else if (curTask.pid === 2){
+      $el.addClass('medium');
+    } else if (curTask.pid === 3){
+      $el.addClass('low');
     }
-  });
+    $el.append('<td>' + curTask.task + '</td>');
+    $el.append('<td>' + curTask.priority + '</td>');
+    $el.append('<td><button id="delete" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '" data-completed="' + curTask.completed + '">del</button>' +
+               '<button id="edit" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '" data-completed="' + curTask.completed + '">edit</button>' +
+               '<button id="completed" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '" data-completed="' + curTask.completed + '">completed</button></td>');
+  } else {
+    $el.addClass('completed');
+    $el.append('<td>' + curTask.task + '</td>');
+    $el.append('<td>' + curTask.priority + '</td>');
+    $el.append('<td><button id="delete" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '" data-completed="' + curTask.completed + '">del</button>' +
+               '<button id="edit" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '" data-completed="' + curTask.completed + '">edit</button>' +
+               '<button id="completed" data-cid="' + curTask.id +'" data-task="' + curTask.task + '" data-priority="' + curTask.priority + '" data-completed="' + curTask.completed + '">completed</button></td>');
+  }
+}
+
+}
+});
 }

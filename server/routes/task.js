@@ -4,6 +4,17 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var pg = require('pg');
 
+//sets pid based on priority level
+function PID(priority){ switch(priority){
+                  case 'high':
+                    return 1;
+                  case 'medium':
+                    return 2;
+                  case 'low':
+                    return 3;
+                  }
+}
+
 var config = {
   database: 'chi', // name of your database
   host: 'localhost', // where is your database?
@@ -20,7 +31,7 @@ router.get('/', function(req, res){
       console.log('Error connecting to the database.');
       res.send(500);
     } else {
-      db.query('SELECT * FROM weekend3_tasks ORDER BY "completed" ASC;', function(queryError, result){
+      db.query('SELECT * FROM weekend3_tasks ORDER BY "completed" ASC, "pid" ASC;', function(queryError, result){
         done();
         if(queryError) {
           console.log('Error making query.');
@@ -38,14 +49,16 @@ router.put('/edit', function(req, res){
   var id = Number(req.body.id);
   var task = req.body.task;
   var priority = req.body.priority;
+
+  var pid = PID(priority);
   pool.connect(function(errorConnectingToDatabase, db, done){
     if(errorConnectingToDatabase) {
       console.log('Error connecting to the database.');
       res.send(500);
     } else {
       db.query('UPDATE weekend3_tasks ' +
-                'SET task=$1, priority=$2 WHERE id=$3;',
-                [task, priority, id], function(queryError, result){
+                'SET task=$1, priority=$2, pid=$3 WHERE id=$4;',
+                [task, priority, pid, id], function(queryError, result){
                 done();
         if(queryError) {
           console.log('Error making query.');
@@ -77,13 +90,15 @@ router.put('/completed', function(req, res){
     } else {
       db.query('UPDATE weekend3_tasks ' +
                 'SET task=$1, priority=$2, completed=$3 WHERE id=$4;',
-                [task, priority, completed, id], function(queryError, result){
+                [task, priority, completed, id],
+        function(queryError, result){
                 done();
         if(queryError) {
           console.log('Error making query.');
           res.sendStatus(500);
         } else {
-          res.sendStatus(200);        }
+          res.sendStatus(200);
+        }
       });
     }
   });
@@ -93,21 +108,25 @@ router.post('/add', function(req, res){
 var task = req.body.task;
 var priority = req.body.priority;
 var completed = req.body.completed;
+var pid = PID(priority);
   pool.connect(function(errorConnectingToDatabase, db, done){
     if(errorConnectingToDatabase) {
       console.log('Error connecting to the database.');
       res.send(500);
     } else {
       // We connected!!!!
-      db.query('INSERT INTO weekend3_tasks (task, priority, completed) VALUES ($1, $2, $3);', [task, priority, completed], function(queryError, result){
-        done();
-        if(queryError) {
-          console.log('Error making query.');
-          res.sendStatus(500);
-        } else {
-          console.log(result); // Good for debugging
-          res.sendStatus(200);
-        }
+      db.query('INSERT INTO weekend3_tasks (task, priority, completed, pid)' +
+                'VALUES ($1, $2, $3, $4);',
+                [task, priority, completed, pid],
+                function(queryError, result){
+                done();
+                if(queryError) {
+                  console.log('Error making query.');
+                  res.sendStatus(500);
+                } else {
+                  console.log(result); // Good for debugging
+                  res.sendStatus(200);
+                }
       });
     }
   });

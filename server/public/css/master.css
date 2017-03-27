@@ -39,12 +39,24 @@ table, th, td {
 th {
   background-color: #5B7B7F;
   color: #ececec;
+  font-size: 24px;
 }
 
 .completed {
   background-color: white;
 }
 
+.high {
+  background-color: #26297a;
+  color: white;
+}
+
+.medium {
+  background-color: #A3DEE5;
+}
+ .low {
+   background-color: #a9cef9;
+ }
 button {
   background-color: #ececec;
   font-family: sans-serif;
