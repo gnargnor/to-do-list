@@ -41,6 +41,10 @@ th {
   color: #ececec;
 }
 
+.completed {
+  background-color: white;
+}
+
 button {
   background-color: #ececec;
   font-family: sans-serif;

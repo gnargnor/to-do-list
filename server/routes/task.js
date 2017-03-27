@@ -15,20 +15,18 @@ var config = {
 var pool = new pg.Pool(config);
 
 router.get('/', function(req, res){
-  // SELECT * FROM "books";
   pool.connect(function(errorConnectingToDatabase, db, done){
     if(errorConnectingToDatabase) {
       console.log('Error connecting to the database.');
       res.send(500);
     } else {
-      // We connected!!!!
-      db.query('SELECT * FROM weekend3_tasks ORDER BY "id" DESC;', function(queryError, result){
+      db.query('SELECT * FROM weekend3_tasks ORDER BY "completed" ASC;', function(queryError, result){
         done();
         if(queryError) {
           console.log('Error making query.');
           res.send(500);
         } else {
-          // console.log(result); // Good for debugging
+          console.log(result.rows);
           res.send(result.rows);
         }
       });
@@ -53,8 +51,39 @@ router.put('/edit', function(req, res){
           console.log('Error making query.');
           res.sendStatus(500);
         } else {
-          res.send(result.rows);
+          console.log(result.rows);
+          res.sendStatus(200);
         }
+      });
+    }
+  });
+});
+
+router.put('/completed', function(req, res){
+  var id = Number(req.body.id);
+  var task = req.body.task;
+  var priority = req.body.priority;
+  var completed = req.body.completed;
+  if (completed === 'false'){
+    completed = 'true';
+  } else {
+    completed = 'false';
+  }
+  console.log(completed);
+  pool.connect(function(errorConnectingToDatabase, db, done){
+    if(errorConnectingToDatabase) {
+      console.log('Error connecting to the database.');
+      res.send(500);
+    } else {
+      db.query('UPDATE weekend3_tasks ' +
+                'SET task=$1, priority=$2, completed=$3 WHERE id=$4;',
+                [task, priority, completed, id], function(queryError, result){
+                done();
+        if(queryError) {
+          console.log('Error making query.');
+          res.sendStatus(500);
+        } else {
+          res.sendStatus(200);        }
       });
     }
   });
@@ -63,20 +92,21 @@ router.put('/edit', function(req, res){
 router.post('/add', function(req, res){
 var task = req.body.task;
 var priority = req.body.priority;
+var completed = req.body.completed;
   pool.connect(function(errorConnectingToDatabase, db, done){
     if(errorConnectingToDatabase) {
       console.log('Error connecting to the database.');
       res.send(500);
     } else {
       // We connected!!!!
-      db.query('INSERT INTO weekend3_tasks (task, priority) VALUES ($1, $2);', [task, priority], function(queryError, result){
+      db.query('INSERT INTO weekend3_tasks (task, priority, completed) VALUES ($1, $2, $3);', [task, priority, completed], function(queryError, result){
         done();
         if(queryError) {
           console.log('Error making query.');
-          res.send(500);
+          res.sendStatus(500);
         } else {
-          // console.log(result); // Good for debugging
-          res.send(result.rows);
+          console.log(result); // Good for debugging
+          res.sendStatus(200);
         }
       });
     }
@@ -97,8 +127,8 @@ router.delete('/delete/:id', function(req, res){
           console.log('Error making query.');
           res.send(500);
         } else {
-          // console.log(result); // Good for debugging
-          res.send(result.rows);
+          console.log(result); // Good for debugging
+          res.sendStatus(200);
         }
       });
     }
