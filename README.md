@@ -53,7 +53,7 @@ Follow the steps below to get a copy of the To-Do List application up and runnin
 * [Node.js](https://nodejs.org)
 * [Express](http://expressjs.com/)
 * [jQuery](jquery.com)
-* [PostGreSQL](https://postgresql.org)
+* [PostgreSQL](https://postgresql.org)
 * [Postico](https://eggerapps.at/postico/)
 * CSS3
 * HTML5
