@@ -52,7 +52,7 @@ Follow the steps below to get a copy of the To-Do List application up and runnin
 
 * [Node.js](https://nodejs.org)
 * [Express](http://expressjs.com/)
-* [jQuery](jquery.com)
+* [jQuery](http://jquery.com)
 * [PostgreSQL](https://postgresql.org)
 * [Postico](https://eggerapps.at/postico/)
 * CSS3
@@ -63,7 +63,7 @@ Follow the steps below to get a copy of the To-Do List application up and runnin
 
 * **Logan Kelly**
   * [github.com/gnargnor](https://github.com/gnargnor)  
-  * [Bizzey Tech, LLC](www.bizzeytech.com)  
+  * [Bizzey Tech, LLC](http://www.bizzeytech.com)  
 
 ## License
 
@@ -71,4 +71,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* [Prime Academy](www.primeacademy.io) - assignment credit
+* [Prime Academy](http://www.primeacademy.io) - assignment credit
