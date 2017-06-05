@@ -35,7 +35,10 @@ Follow the steps below to get a copy of the To-Do List application up and runnin
 >grunt
 ```
 * Postico
-  * Start a local Postico database server on port 5432 (default port for postico)
+  * Start a local Postico database server on port 5432 (default port for postico)  
+```
+>brew services start postgresql
+``` 
   * The database name will be 'chi' by default - this can be changed in task.js under the server folder of the project
 * Node
   * Spin up the Node server
